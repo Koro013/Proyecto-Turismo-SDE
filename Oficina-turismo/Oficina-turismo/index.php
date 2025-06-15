@@ -10,17 +10,19 @@ include('includes/header.php');
 include('includes/navbar.php');
 ?>
 
-<main>
-    <section class="hero">
-        <h1><?= $texto['bienvenida'] ?></h1>
-        <p><?= $texto['mision'] ?></p>
-        <a href="pages/destinos.php" class="btn"><?= $texto['btn_explorar'] ?></a>
+<main class="container py-4">
+    <section class="text-center py-5 hero bg-light rounded">
+        <h1 class="display-4 mb-3"><?= $texto['bienvenida'] ?></h1>
+        <p class="lead mb-4"><?= $texto['mision'] ?></p>
+        <a href="pages/destinos.php" class="btn btn-primary"><?= $texto['btn_explorar'] ?></a>
     </section>
 
-    <section class="intro">
+    <section class="intro text-center mt-5">
         <h2><?= $texto['titulo'] ?></h2>
     </section>
-    <a href="?lang=es">🇦🇷 Español</a> | <a href="?lang=en">🇬🇧 English</a>
+    <div class="text-center mt-3">
+        <a href="?lang=es" class="me-2">🇦🇷 Español</a> | <a href="?lang=en" class="ms-2">🇬🇧 English</a>
+    </div>
 </main>
 
 <?php include('includes/footer.php'); ?>

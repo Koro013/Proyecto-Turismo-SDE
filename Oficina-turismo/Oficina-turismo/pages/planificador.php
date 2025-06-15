@@ -12,10 +12,10 @@ $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!-- ✅ Estilo del planificador -->
 <link rel="stylesheet" href="/Oficina-turismo/assets/css/planificador.css">
 
-<main style="max-width: 1100px; margin: auto;">
-    <h2>🧭 Planificador de Ruta Personalizada</h2>
+<main class="container py-4" style="max-width: 1100px;">
+    <h2 class="mb-4 text-center">🧭 Planificador de Ruta Personalizada</h2>
 
-    <div class="destinos-grid">
+    <div class="destinos-grid row justify-content-center">
         <?php foreach ($destinos as $d): ?>
             <label class="destino-card">
                 <input type="checkbox" class="destino"

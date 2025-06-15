@@ -17,23 +17,25 @@ try {
 }
 ?>
 
-<main>
-    <h2>Destinos Turísticos</h2>
+<main class="container py-4">
+    <h2 class="mb-4 text-center">Destinos Turísticos</h2>
 
     <!-- Filtro por categoría -->
-    <form method="GET" style="margin-bottom: 20px; text-align:center;">
-        <label for="categoria">Filtrar por categoría:</label>
-        <select name="categoria" onchange="this.form.submit()">
+    <form method="GET" class="row mb-4 justify-content-center">
+        <label for="categoria" class="col-auto col-form-label">Filtrar por categoría:</label>
+        <div class="col-auto">
+            <select name="categoria" class="form-select" onchange="this.form.submit()">
             <option value="">-- Todas --</option>
             <?php foreach ($categorias as $cat): ?>
                 <option value="<?= $cat['IdCategoria'] ?>" <?= $categoriaSeleccionada == $cat['IdCategoria'] ? 'selected' : '' ?>>
                     <?= $cat['Descripcion'] ?>
                 </option>
             <?php endforeach; ?>
-        </select>
+            </select>
+        </div>
     </form>
 
-    <div class="grid">
+    <div class="grid row row-cols-1 row-cols-md-3 g-4">
         <?php
         try {
             if ($categoriaSeleccionada) {
