@@ -45,16 +45,16 @@ foreach ($destinos as $d) {
 }
 ?>
 
-<main style="max-width: 1100px; margin: auto;">
-    <a href="/Oficina-turismo/pages/rutas.php" class="btn">← Volver a Rutas</a>
-    <h2><?= $ruta['Nombre'] ?></h2>
+<main class="container py-4" style="max-width: 1100px;">
+    <a href="/Oficina-turismo/pages/rutas.php" class="btn btn-secondary mb-3">← Volver a Rutas</a>
+    <h2 class="mb-3 text-center"><?= $ruta['Nombre'] ?></h2>
     <p><strong>Descripción:</strong> <?= $ruta['Descripcion'] ?></p>
     <p><strong>Duración estimada:</strong> <?= $ruta['Duracion'] ?> min</p>
     <p><strong>Costo total:</strong> $<?= number_format($costoTotal, 2) ?></p>
     <p><strong>Edad recomendada:</strong> <?= $ruta['EdadRecomendada'] ?>+</p>
 
-    <h3>Destinos incluidos en esta ruta</h3>
-    <div class="grid">
+    <h3 class="mt-4">Destinos incluidos en esta ruta</h3>
+    <div class="grid row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($destinos as $d): ?>
             <div class="card">
                 <img src="/Oficina-turismo/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>" width="300">

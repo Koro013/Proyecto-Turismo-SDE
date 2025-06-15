@@ -11,11 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email'])) {
 }
 ?>
 
-<main>
-    <h2>Suscribite a nuestro boletín</h2>
+<main class="container py-4" style="max-width: 600px;">
+    <h2 class="text-center mb-4">Suscribite a nuestro boletín</h2>
     <form action="" method="post" class="form">
-        <input type="email" name="email" placeholder="Tu correo electrónico" required>
-        <button type="submit">Suscribirme</button>
+        <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Tu correo electrónico" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Suscribirme</button>
     </form>
 </main>
 

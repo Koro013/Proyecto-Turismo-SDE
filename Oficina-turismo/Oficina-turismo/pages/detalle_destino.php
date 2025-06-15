@@ -20,14 +20,14 @@ if (!$destino) {
 }
 ?>
 
-<main style="max-width: 1000px; margin: auto;">
-    <h2><?= $destino['Nombre'] ?></h2>
-    <img src="/Oficina-turismo/assets/images/<?= $destino['ImagenDelLugar'] ?>" alt="<?= $destino['Nombre'] ?>" width="100%">
-    
-    <p style="margin-top: 15px;"><?= $destino['descripcion'] ?></p>
+<main class="container py-4" style="max-width: 1000px;">
+    <h2 class="mb-3 text-center"><?= $destino['Nombre'] ?></h2>
+    <img src="/Oficina-turismo/assets/images/<?= $destino['ImagenDelLugar'] ?>" alt="<?= $destino['Nombre'] ?>" class="img-fluid mb-3">
+
+    <p class="mb-4"><?= $destino['descripcion'] ?></p>
 
 
-    <h3>Ubicación</h3>
+    <h3 class="mb-3">Ubicación</h3>
     <div style="width: 100%; height: 400px; margin-bottom: 20px;">
         <iframe
             width="100%"
@@ -38,8 +38,8 @@ if (!$destino) {
             allowfullscreen>
         </iframe>
         <?php if (!empty($destino['Latitud']) && !empty($destino['Longitud'])): ?>
-          <p style="text-align: center; margin-top: 10px;">
-        <a href="https://www.google.com/maps/search/?api=1&query=<?= $destino['Latitud'] ?>,<?= $destino['Longitud'] ?>" target="_blank" class="btn">
+          <p class="text-center mt-3">
+        <a href="https://www.google.com/maps/search/?api=1&query=<?= $destino['Latitud'] ?>,<?= $destino['Longitud'] ?>" target="_blank" class="btn btn-primary">
             🌍 Ver en Google Maps
         </a>
     </p>

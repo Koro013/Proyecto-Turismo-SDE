@@ -5,9 +5,9 @@ include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/../includes/navbar.php');
 ?>
 
-<main>
-    <h2>Rutas Sugeridas</h2>
-    <div class="grid">
+<main class="container py-4">
+    <h2 class="mb-4 text-center">Rutas Sugeridas</h2>
+    <div class="grid row row-cols-1 row-cols-md-3 g-4">
         <?php
         try {
             $stmt = $pdo->query("SELECT * FROM rutas");
