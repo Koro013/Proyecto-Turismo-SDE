@@ -20,6 +20,9 @@ if (!$destino) {
 }
 ?>
 
+<!-- Estilos específicos de la página -->
+<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destino-style.css">
+
 <main class="container py-4" style="max-width: 1000px;">
     <h2 class="mb-3 text-center"><?= $destino['Nombre'] ?></h2>
     <img src="/Oficina-turismo/assets/images/<?= $destino['ImagenDelLugar'] ?>" alt="<?= $destino['Nombre'] ?>" class="img-fluid mb-3">
