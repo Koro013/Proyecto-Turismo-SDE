@@ -46,11 +46,11 @@ foreach ($destinos as $d) {
 ?>
 
 <!-- Estilos específicos de la página -->
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorrido-style.css">
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorrido-form-styles.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/recorrido-style.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/recorrido-form-styles.css">
 
 <main class="container py-4" style="max-width: 1100px;">
-    <a href="/Oficina-turismo/pages/rutas.php" class="btn btn-secondary mb-3">← Volver a Rutas</a>
+    <a href="<?= BASE_URL ?>/pages/rutas.php" class="btn btn-secondary mb-3">← Volver a Rutas</a>
     <h2 class="mb-3 text-center"><?= $ruta['Nombre'] ?></h2>
     <p><strong>Descripción:</strong> <?= $ruta['Descripcion'] ?></p>
     <p><strong>Duración estimada:</strong> <?= $ruta['Duracion'] ?> min</p>
@@ -61,7 +61,7 @@ foreach ($destinos as $d) {
     <div class="grid row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($destinos as $d): ?>
             <div class="card">
-                <img src="/Oficina-turismo/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>" width="300">
+                <img src="<?= BASE_URL ?>/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>" width="300">
                 <h4><?= $d['Nombre'] ?></h4>
                 <p><strong>Ubicación:</strong> <?= $d['Ubicacion'] ?></p>
                 <p><strong>Horario:</strong> <?= $d['Horario'] ?></p>

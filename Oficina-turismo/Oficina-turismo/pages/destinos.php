@@ -18,8 +18,8 @@ try {
 ?>
 
 <!-- Estilos específicos de la página -->
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destinos-style.css">
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destinos-form-styles.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/destinos-style.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/destinos-form-styles.css">
 
 <main class="container py-4">
     <h2 class="mb-4 text-center">Destinos Turísticos</h2>
@@ -60,14 +60,14 @@ try {
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "<div class='card'>";
-                echo "<img src='/Oficina-turismo/assets/images/{$row['ImagenDelLugar']}' alt='{$row['Nombre']}' width='300'>";
+                echo "<img src='<?= BASE_URL ?>/assets/images/{$row['ImagenDelLugar']}' alt='{$row['Nombre']}' width='300'>";
                 echo "<h3>{$row['Nombre']}</h3>";
                 echo "<p><strong>Categoría:</strong> {$row['CategoriaNombre']}</p>";
                 echo "<p><strong>Ubicación:</strong> {$row['Ubicacion']}</p>";
                 echo "<p><strong>Horario:</strong> {$row['Horario']}</p>";
                 echo "<p><strong>Costo:</strong> \$" . number_format($row['CostoDeVisita'], 2) . "</p>";
                 echo "<p><strong>Edad Recomendada:</strong> {$row['EdadRecomendada']}+</p>";
-                echo "<p><a href='/Oficina-turismo/pages/detalle_destino.php?id={$row['IdLugar']}' class='btn'>Ver más</a></p>";
+                echo "<p><a href='<?= BASE_URL ?>/pages/detalle_destino.php?id={$row['IdLugar']}' class='btn'>Ver más</a></p>";
                 echo "</div>";
             }
 

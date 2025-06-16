@@ -4,7 +4,7 @@
     <section class="text-center py-5 hero bg-light rounded">
         <h1 class="display-5 mb-3">🌄 Bienvenidos a Santiago del Estero</h1>
         <p class="lead mb-4">Explorá una tierra llena de historia, cultura y naturaleza viva.</p>
-        <a href="/Oficina-turismo/pages/destinos.php" class="btn btn-primary">Ver Destinos</a>
+        <a href="<?= BASE_URL ?>/pages/destinos.php" class="btn btn-primary">Ver Destinos</a>
     </section>
 
     <section class="features row text-center mt-5">

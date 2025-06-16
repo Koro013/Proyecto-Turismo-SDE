@@ -10,7 +10,7 @@ $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!-- ✅ Estilo del planificador -->
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/planificador.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/planificador.css">
 
 <main class="container py-4" style="max-width: 1100px;">
     <h2 class="mb-4 text-center">🧭 Planificador de Ruta Personalizada</h2>
@@ -25,7 +25,7 @@ $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     data-tiempo="60"
                     data-costo="<?= $d['CostoDeVisita'] ?>">
                 <div class="contenido">
-                    <img src="/Oficina-turismo/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>">
+                    <img src="<?= BASE_URL ?>/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>">
                     <div class="info">
                         <h4><?= $d['Nombre'] ?></h4>
                         <p>$<?= number_format($d['CostoDeVisita'], 2) ?></p>
@@ -41,7 +41,7 @@ $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <p><strong>Costo total:</strong> $<span id="costo">0.00</span></p>
 
         <!-- 📄 Botón para exportar PDF -->
-        <form id="formExport" method="post" action="/Oficina-turismo/export/generar_pdf.php" target="_blank">
+        <form id="formExport" method="post" action="<?= BASE_URL ?>/export/generar_pdf.php" target="_blank">
             <input type="hidden" name="lugares" id="inputLugares">
             <button type="submit" class="btn">📄 Exportar a PDF</button>
         </form>
