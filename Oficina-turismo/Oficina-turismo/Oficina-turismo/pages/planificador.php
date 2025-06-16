@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../config/db.php');
+$pageStyles = ['/Oficina-turismo/assets/css/planficador.css'];
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/../includes/navbar.php');
 
@@ -9,8 +10,7 @@ $stmt = $pdo->query("SELECT * FROM destinos WHERE Latitud IS NOT NULL AND Longit
 $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!-- ✅ Estilo del planificador -->
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/planificador.css">
+
 
 <main class="container py-4" style="max-width: 1100px;">
     <h2 class="mb-4 text-center">🧭 Planificador de Ruta Personalizada</h2>

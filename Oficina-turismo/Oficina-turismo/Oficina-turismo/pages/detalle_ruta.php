@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 
 session_start();
 require_once(__DIR__ . '/../config/db.php');
+$pageStyles = ['/Oficina-turismo/assets/css/front/recorrido-style.css'];
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/../includes/navbar.php');
 
@@ -56,13 +57,17 @@ foreach ($destinos as $d) {
     <h3 class="mt-4">Destinos incluidos en esta ruta</h3>
     <div class="grid row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($destinos as $d): ?>
-            <div class="card">
-                <img src="/Oficina-turismo/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>" width="300">
-                <h4><?= $d['Nombre'] ?></h4>
-                <p><strong>Ubicación:</strong> <?= $d['Ubicacion'] ?></p>
-                <p><strong>Horario:</strong> <?= $d['Horario'] ?></p>
-                <p><strong>Costo:</strong> $<?= number_format($d['CostoDeVisita'], 2) ?></p>
-                <p><?= $d['descripcion'] ?? 'Descripción no disponible.' ?></p>
+            <div class="col">
+                <div class="card tarjeta-recorridos h-100 text-center shadow-sm">
+                    <img src="/Oficina-turismo/assets/images/<?= $d['ImagenDelLugar'] ?>" alt="<?= $d['Nombre'] ?>" class="card-img-top tarjeta-imagen">
+                    <div class="card-body">
+                        <h4 class="card-title h6 bebas-neue-regular mb-2"><?= $d['Nombre'] ?></h4>
+                        <p class="card-text"><strong>Ubicación:</strong> <?= $d['Ubicacion'] ?></p>
+                        <p class="card-text"><strong>Horario:</strong> <?= $d['Horario'] ?></p>
+                        <p class="card-text"><strong>Costo:</strong> $<?= number_format($d['CostoDeVisita'], 2) ?></p>
+                        <p class="card-text"><?= $d['descripcion'] ?? 'Descripción no disponible.' ?></p>
+                    </div>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>

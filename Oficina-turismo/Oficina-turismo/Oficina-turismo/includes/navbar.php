@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark nav-color shadow-sm">
     <div class="container-fluid">
         <a class="navbar-brand" href="/Oficina-turismo/index.php">
             <img src="/Oficina-turismo/assets/images/santiago-logo.png" alt="Logo" id="navLogo" class="img-fluid" style="height:40px;">

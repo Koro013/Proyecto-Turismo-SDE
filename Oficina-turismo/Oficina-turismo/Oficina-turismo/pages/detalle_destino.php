@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once(__DIR__ . '/../config/db.php');
+$pageStyles = ['/Oficina-turismo/assets/css/front/destino-style.css'];
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/../includes/navbar.php');
 

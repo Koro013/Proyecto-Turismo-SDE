@@ -12,5 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bungee&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/Oficina-turismo/assets/css/styles.css">
     <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/index-satyle.css">
+    <?php if (!empty($pageStyles) && is_array($pageStyles)): ?>
+        <?php foreach ($pageStyles as $style): ?>
+            <link rel="stylesheet" href="<?= $style ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body>

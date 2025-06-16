@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once(__DIR__ . '/../config/db.php');
+$pageStyles = ['/Oficina-turismo/assets/css/front/recorridos-style.css'];
 include(__DIR__ . '/../includes/header.php');
 include(__DIR__ . '/../includes/navbar.php');
 ?>
@@ -12,16 +13,17 @@ include(__DIR__ . '/../includes/navbar.php');
         try {
             $stmt = $pdo->query("SELECT * FROM rutas");
             while ($ruta = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<div class='card'>";
-                echo "<h3>{$ruta['Nombre']}</h3>";
-                echo "<p><strong>Duración:</strong> {$ruta['Duracion']} min</p>";
-                echo "<p><strong>Costo:</strong> \$" . number_format($ruta['CostoDelRecorrido'], 2) . "</p>";
-                echo "<p><strong>Edad Recomendada:</strong> {$ruta['EdadRecomendada']}+</p>";
-                echo "<p>{$ruta['Descripcion']}</p>";
-
-                // 🔗 Enlace al detalle de la ruta
-                echo "<p><a href='/Oficina-turismo/pages/detalle_ruta.php?id={$ruta['IdRecorrido']}' class='btn'>Ver más</a></p>";
-
+                echo "<div class='col'>";
+                echo "  <div class='card tarjeta-recorrido h-100 text-center shadow-sm'>";
+                echo "    <div class='card-body'>";
+                echo "      <h3 class='card-title h5 bebas-neue-regular mb-2'>{$ruta['Nombre']}</h3>";
+                echo "      <p class='card-text'><strong>Duración:</strong> {$ruta['Duracion']} min</p>";
+                echo "      <p class='card-text'><strong>Costo:</strong> \$" . number_format($ruta['CostoDelRecorrido'], 2) . "</p>";
+                echo "      <p class='card-text'><strong>Edad Recomendada:</strong> {$ruta['EdadRecomendada']}+</p>";
+                echo "      <p class='card-text'>{$ruta['Descripcion']}</p>";
+                echo "      <a href='/Oficina-turismo/pages/detalle_ruta.php?id={$ruta['IdRecorrido']}' class='btn btn-primary botones-cuerpo'>Ver más</a>";
+                echo "    </div>";
+                echo "  </div>";
                 echo "</div>";
             }
         } catch (PDOException $e) {
