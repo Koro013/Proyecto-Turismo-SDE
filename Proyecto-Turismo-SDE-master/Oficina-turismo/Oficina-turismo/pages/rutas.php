@@ -1,5 +1,5 @@
 <?php
-include_once "admin/db_config.php";
+require_once __DIR__ . '/../config/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -7,7 +7,7 @@ include_once "admin/db_config.php";
 <head>
   <meta charset="UTF-8">
   <title>Recorridos Turísticos - Turismo SDE</title>
-  <link rel="icon" href="assets/img/favico/favico.png" type="image/x-icon">
+  <link rel="icon" href="assets/images/favico/favico.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap -->
@@ -15,7 +15,7 @@ include_once "admin/db_config.php";
     integrity="sha384-..." crossorigin="anonymous">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="assets/css/rutas-style.css">
+  <link rel="stylesheet" href="assets/css/front/recorridos-style.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -32,11 +32,11 @@ include_once "admin/db_config.php";
 
   <div class="row">
     <?php
-      $query = "SELECT * FROM rutas ORDER BY nombre ASC";
-      $result = mysqli_query($conn, $query);
+      $stmt = $pdo->query("SELECT * FROM rutas ORDER BY nombre ASC");
+      $rutas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-      if ($result && mysqli_num_rows($result) > 0):
-        while ($ruta = mysqli_fetch_assoc($result)):
+      if ($rutas):
+        foreach ($rutas as $ruta):
     ?>
       <div class="col-md-6 mb-4">
         <div class="card h-100 shadow-sm border-0">
@@ -50,7 +50,7 @@ include_once "admin/db_config.php";
         </div>
       </div>
     <?php
-        endwhile;
+        endforeach;
       else:
     ?>
       <p class="text-center">No hay rutas disponibles actualmente.</p>

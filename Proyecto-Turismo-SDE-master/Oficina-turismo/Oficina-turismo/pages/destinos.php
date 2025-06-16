@@ -1,11 +1,11 @@
-include_once "admin/db_config.php";
+require_once __DIR__ . '/../config/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Destinos Turísticos - Turismo SDE</title>
-  <link rel="icon" href="assets/img/favico/favico.png" type="image/x-icon">
+  <link rel="icon" href="assets/images/favico/favico.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap -->
@@ -13,7 +13,7 @@ include_once "admin/db_config.php";
     integrity="sha384-..." crossorigin="anonymous">
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="assets/css/destinos-style.css">
+  <link rel="stylesheet" href="assets/css/front/destinos-style.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -29,15 +29,15 @@ include_once "admin/db_config.php";
 
   <div class="row">
     <?php
-      $query = "SELECT * FROM destinos ORDER BY nombre ASC";
-      $result = mysqli_query($conn, $query);
+      $stmt = $pdo->query("SELECT * FROM destinos ORDER BY nombre ASC");
+      $destinos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-      if ($result && mysqli_num_rows($result) > 0):
-        while ($destino = mysqli_fetch_assoc($result)):
+      if ($destinos):
+        foreach ($destinos as $destino):
     ?>
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100 shadow-sm">
-          <img src="admin/imagenes/<?php echo htmlspecialchars($destino['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($destino['nombre']); ?>">
+          <img src="assets/images/<?php echo htmlspecialchars($destino['imagen']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($destino['nombre']); ?>">
           <div class="card-body">
             <h5 class="card-title"><?php echo htmlspecialchars($destino['nombre']); ?></h5>
             <p class="card-text"><?php echo htmlspecialchars($destino['descripcion']); ?></p>
@@ -45,7 +45,7 @@ include_once "admin/db_config.php";
         </div>
       </div>
     <?php
-        endwhile;
+        endforeach;
       else:
     ?>
       <p class="text-center">No hay destinos cargados actualmente.</p>
