@@ -1,0 +1,32 @@
+:root {
+  --azul-sde: #080C94;
+  --rojo-sde: #950808;
+  --negro-sde: #000000;
+}
+
+.navbar-dark.bg-dark {
+  background-color: var(--negro-sde) !important;
+}
+
+.btn-primary {
+  background-color: var(--azul-sde) !important;
+  border-color: var(--azul-sde) !important;
+}
+
+.btn-primary:hover {
+  background-color: #060A7A !important;
+  border-color: #060A7A !important;
+}
+
+footer {
+  background-color: var(--negro-sde);
+  color: #fff;
+}
+
+a {
+  color: var(--rojo-sde);
+}
+
+a:hover {
+  color: var(--azul-sde);
+}

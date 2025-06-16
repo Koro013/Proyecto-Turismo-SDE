@@ -69,7 +69,7 @@ foreach ($destinos as $d) {
 
     <h3>Mapa de la Ruta</h3>
     <?php if (!empty($latlngs)): ?>
-        <div id="map" style="width: 100%; height: 500px;"></div>
+        <div id="map" class="map-container" style="height: 500px;"></div>
     <?php else: ?>
         <p style="color: orange;">⚠️ Esta ruta no tiene coordenadas cargadas para mostrar en el mapa.</p>
     <?php endif; ?>

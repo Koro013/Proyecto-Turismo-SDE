@@ -35,7 +35,7 @@ footer {
 
   /* Se saca el color estandar de la letra */
   /* background-image: linear-gradient(150deg , #fc0000 0%, #0040ff 90%); */
-  background-image: linear-gradient(90deg, #080C94, #950808);
+  background-image: linear-gradient(90deg, var(--azul-sde), var(--rojo-sde));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -49,7 +49,7 @@ footer {
 }
 
 .nav-color {
-  background-image: linear-gradient(90deg, #950808, #080C94);
+  background-image: linear-gradient(90deg, var(--rojo-sde), var(--azul-sde));
 }
 
 .conteiner-img-carrousel {
@@ -102,7 +102,7 @@ footer {
   font-size: 6vw;
   letter-spacing: 0.5vw;
   border: 0px;
-  background-image: linear-gradient(90deg, #950808, #080C94);
+  background-image: linear-gradient(90deg, var(--rojo-sde), var(--azul-sde));
   opacity: 100%;
   transition: opacity 0.5s ease-in-out;
   border-radius: 12px;
@@ -117,8 +117,8 @@ footer {
   font-size: 45px;
   width: 220px;
   height: 60px;
-  background-color: #950808;
-  box-shadow: 8px 8px 0px #080C94;
+  background-color: var(--rojo-sde);
+  box-shadow: 8px 8px 0px var(--azul-sde);
 }
 
 .tarjeta-inicio {

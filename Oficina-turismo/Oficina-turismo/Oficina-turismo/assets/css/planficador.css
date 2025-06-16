@@ -54,7 +54,7 @@
     margin: 0 auto 40px auto;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #0077cc;
+    border: 2px solid var(--azul-sde);
 }
 
 /* 🔥 Animación slide + fade para mapa */

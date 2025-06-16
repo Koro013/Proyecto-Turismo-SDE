@@ -27,7 +27,7 @@ footer {
 }
 
 .nav-color {
-  background-image: linear-gradient(90deg, #950808, #080C94);
+  background-image: linear-gradient(90deg, var(--rojo-sde), var(--azul-sde));
 }
 
 .tarjeta-recorrido{
