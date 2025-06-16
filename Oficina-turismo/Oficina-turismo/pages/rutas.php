@@ -6,8 +6,8 @@ include(__DIR__ . '/../includes/navbar.php');
 ?>
 
 <!-- Estilos específicos de la página -->
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorridos-style.css">
-<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorridos-form-styles.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/recorridos-style.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/front/recorridos-form-styles.css">
 
 <main class="container py-4">
     <h2 class="mb-4 text-center">Rutas Sugeridas</h2>
@@ -24,7 +24,7 @@ include(__DIR__ . '/../includes/navbar.php');
                 echo "<p>{$ruta['Descripcion']}</p>";
 
                 // 🔗 Enlace al detalle de la ruta
-                echo "<p><a href='/Oficina-turismo/pages/detalle_ruta.php?id={$ruta['IdRecorrido']}' class='btn'>Ver más</a></p>";
+                echo "<p><a href='<?= BASE_URL ?>/pages/detalle_ruta.php?id={$ruta['IdRecorrido']}' class='btn'>Ver más</a></p>";
 
                 echo "</div>";
             }
