@@ -17,6 +17,10 @@ try {
 }
 ?>
 
+<!-- Estilos específicos de la página -->
+<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destinos-style.css">
+<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destinos-form-styles.css">
+
 <main class="container py-4">
     <h2 class="mb-4 text-center">Destinos Turísticos</h2>
 

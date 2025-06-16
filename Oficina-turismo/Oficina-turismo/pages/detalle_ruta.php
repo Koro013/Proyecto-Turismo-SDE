@@ -45,6 +45,10 @@ foreach ($destinos as $d) {
 }
 ?>
 
+<!-- Estilos específicos de la página -->
+<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorrido-style.css">
+<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/recorrido-form-styles.css">
+
 <main class="container py-4" style="max-width: 1100px;">
     <a href="/Oficina-turismo/pages/rutas.php" class="btn btn-secondary mb-3">← Volver a Rutas</a>
     <h2 class="mb-3 text-center"><?= $ruta['Nombre'] ?></h2>
