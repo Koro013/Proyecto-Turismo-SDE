@@ -55,7 +55,8 @@ try {
             }
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<div class='card tarjeta-destinos h-100 text-center shadow-sm'>";
+                echo "<div class='col'>";
+                echo "  <div class='card tarjeta-destinos h-100 text-center shadow-sm'>";
                 echo "    <img class='card-img-top tarjeta-imagen' src='/Oficina-turismo/assets/images/{$row['ImagenDelLugar']}' alt='{$row['Nombre']}'>";
                 echo "    <div class='card-body'>";
                 echo "        <h3 class='card-title h5 bebas-neue-regular mb-2'>{$row['Nombre']}</h3>";
@@ -66,6 +67,7 @@ try {
                 echo "        <p class='card-text'><strong>Edad Recomendada:</strong> {$row['EdadRecomendada']}+</p>";
                 echo "        <a href='/Oficina-turismo/pages/detalle_destino.php?id={$row['IdLugar']}' class='btn btn-primary botones-cuerpo'>Ver más</a>";
                 echo "    </div>";
+                echo "  </div>";
                 echo "</div>";
             }
 

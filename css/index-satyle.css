@@ -49,7 +49,7 @@ footer {
 }
 
 .nav-color {
-  background-image: linear-gradient(90deg, #950808, #080C94);
+  background-image: linear-gradient(90deg, #080C94, #950808);
 }
 
 .conteiner-img-carrousel {
@@ -159,6 +159,13 @@ footer {
   max-width: auto;
   min-height: 4em;
   max-height: 4em;
+  background-image: linear-gradient(90deg, #080C94, #950808);
+  color: #fff;
+  border: none;
+}
+
+.botones-cuerpo:hover {
+  opacity: 0.9;
 }
 
 .mapa {

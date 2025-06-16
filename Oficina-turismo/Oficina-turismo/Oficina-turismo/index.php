@@ -11,7 +11,7 @@ include('includes/navbar.php');
 ?>
 
 <main class="container py-4">
-    <section class="text-center py-5 hero bg-light rounded">
+    <section class="text-center py-5 hero bg-light rounded shadow-sm">
         <h1 class="display-4 mb-3 bungee-regular">
             <?= $texto['bienvenida'] ?>
         </h1>
