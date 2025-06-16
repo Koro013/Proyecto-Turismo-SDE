@@ -8,7 +8,7 @@ body {
 .navbar {
     display: flex;
     justify-content: space-between;
-    background-color: #0a3d62;
+    background-color: var(--azul-sde);
     padding: 10px 20px;
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .btn {
-    background-color: #1e90ff;
+    background-color: var(--azul-sde);
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
@@ -54,7 +54,7 @@ body {
 }
 
 footer {
-    background-color: #0a3d62;
+    background-color: var(--negro-sde);
     color: white;
     text-align: center;
     padding: 15px 0;
@@ -128,30 +128,17 @@ select {
 
 .btn {
     display: inline-block;
-    padding: 8px 14px;
-    background-color: #0077cc;
+    padding: 10px 18px;
+    background-color: var(--azul-sde);
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: #005fa3;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 18px;
-    background-color: #0077cc;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
     font-weight: bold;
+    margin-top: 10px;
     transition: background-color 0.2s ease;
 }
 .btn:hover {
-    background-color: #005fa3;
+    background-color: #060A7A;
 }
 
 .destinos-grid {
@@ -210,5 +197,5 @@ select {
     margin: auto;
     border-radius: 10px;
     overflow: hidden;
-    border: 2px solid #0077cc;
+    border: 2px solid var(--azul-sde);
 }

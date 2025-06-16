@@ -28,7 +28,7 @@ if (!$destino) {
 
 
     <h3 class="mb-3">Ubicación</h3>
-    <div style="width: 100%; height: 400px; margin-bottom: 20px;">
+    <div class="map-container mb-3">
         <iframe
             width="100%"
             height="100%"
