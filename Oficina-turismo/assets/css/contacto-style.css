@@ -7,7 +7,7 @@
     box-shadow: 0 4px 24px rgba(183,28,28,0.07);
 }
 .sde-contacto-titulo {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 2.15rem;
     font-weight: bold;
     letter-spacing: 1.2px;
@@ -23,7 +23,7 @@
     width: 100%;
     padding: 12px 16px;
     border-radius: 10px;
-    border: 1.5px solid #b71c1c;
+    border: 1.5px solid #c0392b;
     font-size: 1.09rem;
     color: #333;
     margin-bottom: 7px;
@@ -31,12 +31,12 @@
     transition: border 0.2s, box-shadow 0.2s;
 }
 .sde-input:focus, .sde-textarea:focus {
-    border: 2px solid #54a7d6;
+    border: 2px solid #333333;
     outline: none;
     box-shadow: 0 0 0 2px #c6e9f6;
 }
 .sde-btn-enviar {
-    background: #b71c1c;
+    background: #c0392b;
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -49,11 +49,11 @@
 }
 .sde-btn-enviar:hover {
     background: #ffd600;
-    color: #b71c1c;
+    color: #c0392b;
 }
 .sde-contacto-oficina {
     font-size: 1.13rem;
-    color: #54a7d6;
+    color: #333333;
     margin-bottom: 0;
 }
 .sde-contacto-mapa iframe {

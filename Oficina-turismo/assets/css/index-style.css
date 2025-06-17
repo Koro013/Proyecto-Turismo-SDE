@@ -51,7 +51,7 @@
     box-shadow: 0 4px 24px rgba(183,28,28,0.08);
 }
 .sde-hero h1 {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 2.1rem;
 }
 .sde-hero p {
@@ -59,7 +59,7 @@
     font-size: 1.16rem;
 }
 .sde-btn-principal {
-    background: #b71c1c;
+    background: #c0392b;
     color: #fff;
     border: none;
     border-radius: 20px;
@@ -74,7 +74,7 @@
 }
 .sde-btn-principal:hover {
     background: #ffd600;
-    color: #b71c1c;
+    color: #c0392b;
 }
 .sde-intro {
     text-align: center;
@@ -82,7 +82,7 @@
     margin-bottom: 24px;
 }
 .sde-intro h2 {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 1.7rem;
     font-weight: 700;
 }
@@ -91,7 +91,7 @@
     margin-bottom: 22px;
 }
 .sde-lang {
-    color: #b71c1c;
+    color: #c0392b;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.08rem;
@@ -107,7 +107,7 @@
     box-shadow: 0 4px 24px rgba(87,180,214,0.09);
 }
 .sde-destacados h2 {
-    color: #b71c1c;
+    color: #c0392b;
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
@@ -128,7 +128,7 @@
     min-width: 220px;
     transition: transform 0.18s;
     text-align: center;
-    border-bottom: 4px solid #54a7d6;
+    border-bottom: 4px solid #333333;
 }
 .sde-destino-card:hover {
     transform: scale(1.045);

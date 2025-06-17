@@ -5,7 +5,7 @@
 }
 .sde-btn-volver {
     display: inline-block;
-    background: #54a7d6;
+    background: #333333;
     color: #fff;
     border-radius: 14px;
     padding: 7px 22px;
@@ -18,11 +18,11 @@
     border: none;
 }
 .sde-btn-volver:hover {
-    background: #b71c1c;
+    background: #c0392b;
     color: #ffd600;
 }
 .sde-detalleruta-titulo {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 2.15rem;
     font-weight: bold;
     letter-spacing: 1.2px;

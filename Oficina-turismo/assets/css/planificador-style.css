@@ -19,7 +19,7 @@
     max-width: 260px;
     cursor: pointer;
     transition: transform 0.16s, box-shadow 0.16s;
-    border-bottom: 4px solid #54a7d6;
+    border-bottom: 4px solid #333333;
     padding: 0;
     position: relative;
     border: 2px solid transparent;
@@ -46,13 +46,13 @@
     margin-bottom: 7px;
 }
 .sde-card-info h4 {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 1.1rem;
     margin: 0 0 5px 0;
 }
 .sde-card-info p {
     margin: 0 0 7px 0;
-    color: #54a7d6;
+    color: #333333;
     font-weight: 600;
     font-size: 1.07rem;
 }
@@ -70,7 +70,7 @@
     color: #3b3b3b;
 }
 .sde-btn-pdf {
-    background: #b71c1c;
+    background: #c0392b;
     color: #fff;
     border: none;
     border-radius: 16px;
@@ -84,10 +84,10 @@
 }
 .sde-btn-pdf:hover {
     background: #ffd600;
-    color: #b71c1c;
+    color: #c0392b;
 }
 .sde-h3 {
-    color: #b71c1c;
+    color: #c0392b;
     margin-bottom: 12px;
     font-size: 1.19rem;
     text-align: center;
