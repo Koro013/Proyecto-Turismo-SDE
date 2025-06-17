@@ -1,0 +1,71 @@
+.sde-suscripcion-container {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: 0 2vw 30px 2vw;
+    background: #f9e7e7;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(183,28,28,0.07);
+}
+.sde-suscripcion-titulo {
+    color: #b71c1c;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1.1px;
+}
+.sde-form-suscripcion {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(87,180,214,0.09);
+    padding: 28px 18px 20px 18px;
+    margin-bottom: 20px;
+}
+.sde-input {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 10px;
+    border: 1.5px solid #b71c1c;
+    font-size: 1.08rem;
+    color: #333;
+    margin-bottom: 10px;
+    background: #faf7f0;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+.sde-input:focus {
+    border: 2px solid #54a7d6;
+    outline: none;
+    box-shadow: 0 0 0 2px #c6e9f6;
+}
+.sde-btn-suscribir {
+    background: #b71c1c;
+    color: #fff;
+    border: none;
+    border-radius: 11px;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 4px;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px rgba(183,28,28,0.09);
+    display: block;
+    width: 100%;
+}
+.sde-btn-suscribir:hover {
+    background: #ffd600;
+    color: #b71c1c;
+}
+.sde-alert-success {
+    background: #e6fff2;
+    color: #26925d;
+    border-radius: 11px;
+    padding: 14px 18px;
+    margin: 18px 0 12px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.12rem;
+    border-left: 6px solid #00e38e;
+    box-shadow: 0 2px 8px rgba(87,180,214,0.10);
+}
+@media (max-width: 650px) {
+    .sde-suscripcion-container { padding: 0 1vw 14px 1vw;}
+    .sde-suscripcion-titulo { font-size: 1.3rem;}
+}
