@@ -14,17 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Bebas+Neue&family=Bungee&display=swap" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/styles.css">
+    <link rel="stylesheet" href="/Oficina-turismo/assets/css/theme.css">
     <link rel="stylesheet" href="/Oficina-turismo/assets/css/nav.css">
     <link rel="stylesheet" href="/Oficina-turismo/assets/css/footer.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/index-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/destinos-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/rutas-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/detalle_destino-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/detalle_ruta-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/planificador-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/contacto-style.css">
-    <link rel="stylesheet" href="/Oficina-turismo/assets/css/front/suscripcion-style.css">
 
     
 
@@ -40,8 +32,8 @@
     
     // Detecta página actual y carga el CSS específico
     $current = basename($_SERVER['PHP_SELF'], '.php');
-    if (file_exists(__DIR__ . "/../assets/css/front/{$current}-style.css")) {
-        echo '<link rel="stylesheet" href="/Oficina-turismo/assets/css/front/' . $current . '-style.css">';
+    if (file_exists(__DIR__ . "/../assets/css/{$current}-style.css")) {
+        echo '<link rel="stylesheet" href="/Oficina-turismo/assets/css/' . $current . '-style.css">';
     }
     ?>
 </head>

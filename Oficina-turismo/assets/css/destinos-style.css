@@ -4,13 +4,13 @@
     padding: 0 2vw;
 }
 .sde-destinos-titulo {
-    color: #b71c1c;
+    color: #c0392b;
     font-size: 2.3rem;
     font-weight: bold;
     letter-spacing: 1.2px;
 }
 .sde-destinos-filtro label {
-    color: #b71c1c;
+    color: #c0392b;
     font-weight: 500;
     font-size: 1.08rem;
 }
@@ -57,12 +57,12 @@
     font-size: 1.23rem;
 }
 .sde-cat {
-    color: #54a7d6;
+    color: #333333;
     margin-bottom: 2px;
 }
 .sde-btn-destino {
     display: inline-block;
-    background: #b71c1c;
+    background: #c0392b;
     color: #fff;
     border-radius: 15px;
     padding: 7px 22px;
@@ -76,7 +76,7 @@
 }
 .sde-btn-destino:hover {
     background: #ffd600;
-    color: #b71c1c;
+    color: #c0392b;
 }
 @media (max-width: 900px) {
     .sde-destinos-grid { flex-direction: column; gap: 23px; align-items: center; }
