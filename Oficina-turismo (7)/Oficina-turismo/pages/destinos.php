@@ -17,33 +17,21 @@ try {
 ?>
 
 <main class="sde-destinos-container py-4">
-  <div class="destinos-section mb-5 mx-auto">
-    <!-- CARTEL SUPER LLAMATIVO -->
-    <div class="row justify-content-center">
-      <div class="col-auto">
-        <div class="cartel-destinos-wrapper cartel-destinos-efecto">
-          <span class="cartel-destinos">DESTINOS</span>
-        </div>
-      </div>
-    </div>
+    <h2 class="sde-destinos-titulo mb-4 text-center">Destinos Turísticos</h2>
 
-    <!-- Filtro por categoría -->
-    <form method="GET" class="sde-destinos-filtro row mb-4 justify-content-center align-items-center">
-      <label for="categoria" class="col-auto col-form-label cartel-label">Filtrar por categoría:</label>
-      <div class="col-auto">
-        <select name="categoria" class="form-select" onchange="this.form.submit()">
-          <option value="">-- Todas --</option>
-          <?php foreach ($categorias as $cat): ?>
-            <option value="<?= $cat['IdCategoria'] ?>" <?= $categoriaSeleccionada == $cat['IdCategoria'] ? 'selected' : '' ?>>
-              <?= $cat['Descripcion'] ?>
-            </option>
-          <?php endforeach; ?>
+    <form method="GET" class="sde-destinos-filtro mb-4 d-flex justify-content-center align-items-center">
+        <label for="categoria" class="me-2">Filtrar por categoría:</label>
+        <select name="categoria" class="form-select w-auto" onchange="this.form.submit()">
+            <option value="">-- Todas --</option>
+            <?php foreach ($categorias as $cat): ?>
+                <option value="<?= $cat['IdCategoria'] ?>" <?= $categoriaSeleccionada == $cat['IdCategoria'] ? 'selected' : '' ?>>
+                    <?= $cat['Descripcion'] ?>
+                </option>
+            <?php endforeach; ?>
         </select>
-      </div>
     </form>
 
-    <!-- Tarjetas -->
-    <div class="destinos-cards d-flex flex-wrap justify-content-center align-items-stretch">
+    <div class="sde-destinos-grid">
       <?php
       function imagenLibrePorNombre($nombre) {
         $imagenes = [
@@ -73,12 +61,10 @@ try {
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           $imgUrl = imagenLibrePorNombre($row['Nombre']);
-          // FadeInUp staggered
-          $delay = $i * 90;
-          echo "<div class='destino-card-modern card text-center m-3' style='animation-delay: {$delay}ms;'>";
-          echo "<img src='{$imgUrl}' alt='{$row['Nombre']}' class='card-img-top'>";
-          echo "<div class='card-body'>";
-          echo "<p class='card-title'>{$row['Nombre']}</p>";
+          echo "<div class='sde-destino-card'>";
+          echo "<img src='{$imgUrl}' alt='{$row['Nombre']}'>";
+          echo "<div class='sde-destino-card-content'>";
+          echo "<h3>{$row['Nombre']}</h3>";
           echo "<p class='sde-cat'><strong>Categoría:</strong> {$row['CategoriaNombre']}</p>";
           echo "<p><strong>Ubicación:</strong> {$row['Ubicacion']}</p>";
           echo "<p><strong>Horario:</strong> {$row['Horario']}</p>";
@@ -95,5 +81,6 @@ try {
       }
       ?>
     </div>
-  </div>
 </main>
+
+<?php include(__DIR__ . '/../includes/footer.php'); ?>

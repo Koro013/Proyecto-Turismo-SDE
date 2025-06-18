@@ -14,6 +14,13 @@
     font-weight: 500;
     font-size: 1.08rem;
 }
+.sde-destinos-filtro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
 .sde-destinos-grid {
     display: flex;
     gap: 38px;
