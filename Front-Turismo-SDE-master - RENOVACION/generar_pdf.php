@@ -1,7 +1,18 @@
 <?php
 require 'db.php';
-require_once __DIR__ . '/vendor/autoload.php';
-use Dompdf\Dompdf;
+
+$dompdfAvailable = false;
+$dompdfClass = 'Dompdf\\Dompdf';
+$vendorAutoload = __DIR__ . '/vendor/autoload.php';
+if (file_exists($vendorAutoload)) {
+    require_once $vendorAutoload;
+    if (class_exists($dompdfClass)) {
+        $dompdfAvailable = true;
+    }
+}
+if (!$dompdfAvailable) {
+    require_once __DIR__ . '/lib/SimplePdf.php';
+}
 
 $ids = $_POST['destinos'] ?? [];
 if (empty($ids)) {
@@ -22,9 +33,22 @@ $html .= '</ul>';
 $html .= '<p>Total tiempo: '.(int)$totalDur.' min</p>';
 $html .= '<p>Total costo: $'.number_format($totalCosto,2).'</p>';
 
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html);
-$dompdf->render();
-$dompdf->stream('plan.pdf', ['Attachment' => false]);
+if ($dompdfAvailable) {
+    $dompdf = new $dompdfClass();
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+    $dompdf->stream('plan.pdf', ['Attachment' => false]);
+    exit;
+}
+
+$lines = [];
+foreach ($destinos as $d) {
+    $lines[] = '- ' . $d['nombre'] . ' - ' . (int) $d['duracion'] . ' min - $' . number_format($d['costo'], 2);
+}
+$lines[] = '';
+$lines[] = 'Total tiempo: ' . (int) $totalDur . ' min';
+$lines[] = 'Total costo: $' . number_format($totalCosto, 2);
+
+simple_pdf_output('Plan de Viaje', $lines, 'plan.pdf');
 exit;
 ?>
