@@ -1,7 +1,19 @@
 <?php
 require 'db.php';
-require_once __DIR__ . '/vendor/autoload.php';
-use Dompdf\Dompdf;
+require_once __DIR__ . '/lib/PlanPdfFormatter.php';
+
+$dompdfAvailable = false;
+$dompdfClass = 'Dompdf\\Dompdf';
+$vendorAutoload = __DIR__ . '/vendor/autoload.php';
+if (file_exists($vendorAutoload)) {
+    require_once $vendorAutoload;
+    if (class_exists($dompdfClass)) {
+        $dompdfAvailable = true;
+    }
+}
+if (!$dompdfAvailable) {
+    require_once __DIR__ . '/lib/SimplePdf.php';
+}
 
 $ids = $_POST['destinos'] ?? [];
 if (empty($ids)) {
@@ -11,20 +23,18 @@ $placeholders = implode(',', array_fill(0, count($ids), '?'));
 $stmt = $pdo->prepare("SELECT nombre, duracion, costo FROM destinos WHERE id IN ($placeholders)");
 $stmt->execute($ids);
 $destinos = $stmt->fetchAll();
-$totalDur = array_sum(array_column($destinos, 'duracion'));
-$totalCosto = array_sum(array_column($destinos, 'costo'));
+$content = plan_pdf_build_content($destinos);
+$html = $content['html'];
+$lines = $content['lines'];
 
-$html = '<h1>Plan de Viaje</h1><ul>';
-foreach ($destinos as $d) {
-    $html .= '<li>'.htmlspecialchars($d['nombre']).' - '.(int)$d['duracion'].' min - $'.number_format($d['costo'],2).'</li>';
+if ($dompdfAvailable) {
+    $dompdf = new $dompdfClass();
+    $dompdf->loadHtml($html);
+    $dompdf->render();
+    $dompdf->stream('plan.pdf', ['Attachment' => false]);
+    exit;
 }
-$html .= '</ul>';
-$html .= '<p>Total tiempo: '.(int)$totalDur.' min</p>';
-$html .= '<p>Total costo: $'.number_format($totalCosto,2).'</p>';
 
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html);
-$dompdf->render();
-$dompdf->stream('plan.pdf', ['Attachment' => false]);
+simple_pdf_output('Plan de Viaje', $lines, 'plan.pdf');
 exit;
 ?>
