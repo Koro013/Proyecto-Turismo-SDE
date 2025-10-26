@@ -23,7 +23,20 @@ $placeholders = implode(',', array_fill(0, count($ids), '?'));
 $stmt = $pdo->prepare("SELECT nombre, duracion, costo FROM destinos WHERE id IN ($placeholders)");
 $stmt->execute($ids);
 $destinos = $stmt->fetchAll();
-$content = plan_pdf_build_content($destinos);
+$totalsOverride = [
+    'duracion' => $_POST['total_duracion'] ?? null,
+    'costo' => $_POST['total_costo'] ?? null,
+];
+
+foreach ($totalsOverride as $key => $value) {
+    if (!is_numeric($value)) {
+        unset($totalsOverride[$key]);
+    } else {
+        $totalsOverride[$key] += 0;
+    }
+}
+
+$content = plan_pdf_build_content($destinos, $totalsOverride);
 $html = $content['html'];
 $lines = $content['lines'];
 

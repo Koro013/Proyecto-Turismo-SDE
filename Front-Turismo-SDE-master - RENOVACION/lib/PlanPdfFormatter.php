@@ -6,12 +6,14 @@ declare(strict_types=1);
  * Build both HTML and plain-text lines to describe a travel plan.
  *
  * @param array<int, array{nombre:string,duracion:numeric,costo:numeric}> $destinos
- * @return array{html:string, lines:array<int, string>}
+ * @param array{duracion?:numeric,costo?:numeric}|null $totalsOverride
+ *
+ * @return array{html:string, lines:array<int, string>, totals:array{duracion:int,costo:float}}
  */
-function plan_pdf_build_content(array $destinos): array
+function plan_pdf_build_content(array $destinos, ?array $totalsOverride = null): array
 {
-    $totalDur = 0;
-    $totalCosto = 0.0;
+    $calculatedDur = 0;
+    $calculatedCosto = 0.0;
 
     $rows = [];
     $lines = [];
@@ -21,8 +23,8 @@ function plan_pdf_build_content(array $destinos): array
         $duracion = (int) ($destino['duracion'] ?? 0);
         $costo = (float) ($destino['costo'] ?? 0);
 
-        $totalDur += $duracion;
-        $totalCosto += $costo;
+        $calculatedDur += $duracion;
+        $calculatedCosto += $costo;
 
         $rows[] = sprintf(
             '<tr>'
@@ -63,20 +65,44 @@ function plan_pdf_build_content(array $destinos): array
         $htmlParts[] = '<p>No se seleccionaron destinos.</p>';
     }
 
+    $totalDur = (int) round(plan_pdf_select_total($totalsOverride['duracion'] ?? null, $calculatedDur));
+    $totalCosto = (float) plan_pdf_select_total($totalsOverride['costo'] ?? null, $calculatedCosto);
+
     $htmlParts[] = sprintf(
         '<p><strong>Total tiempo:</strong> %d min</p>',
-        (int) $totalDur
+        $totalDur
     );
     $htmlParts[] = sprintf(
         '<p><strong>Total costo:</strong> $%s</p>',
         number_format($totalCosto, 2)
     );
 
-    $lines[] = 'Total tiempo: ' . (int) $totalDur . ' min';
+    $lines[] = 'Total tiempo: ' . $totalDur . ' min';
     $lines[] = 'Total costo: $' . number_format($totalCosto, 2);
 
     return [
         'html' => implode("\n", $htmlParts),
         'lines' => $lines,
+        'totals' => [
+            'duracion' => $totalDur,
+            'costo' => $totalCosto,
+        ],
     ];
+}
+
+/**
+ * Pick a numeric total favouring client-provided overrides when valid.
+ *
+ * @param numeric|null $override
+ * @param numeric $calculated
+ *
+ * @return float|int
+ */
+function plan_pdf_select_total($override, $calculated)
+{
+    if (is_numeric($override)) {
+        return $override + 0;
+    }
+
+    return $calculated + 0;
 }
