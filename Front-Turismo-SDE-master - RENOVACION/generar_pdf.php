@@ -1,5 +1,7 @@
 <?php
 require 'db.php';
+require_once __DIR__ . '/lib/PlanPdfFormatter.php';
+
 $dompdfAvailable = false;
 $dompdfClass = 'Dompdf\\Dompdf';
 $vendorAutoload = __DIR__ . '/vendor/autoload.php';
@@ -45,7 +47,6 @@ if ($dompdfAvailable) {
     $dompdf->stream('plan.pdf', ['Attachment' => false]);
     exit;
 }
-
 
 simple_pdf_output('Plan de Viaje', $lines, 'plan.pdf');
 exit;
