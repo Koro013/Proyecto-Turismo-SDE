@@ -50,4 +50,3 @@ if ($dompdfAvailable) {
 
 simple_pdf_output('Plan de Viaje', $lines, 'plan.pdf');
 exit;
-?>
