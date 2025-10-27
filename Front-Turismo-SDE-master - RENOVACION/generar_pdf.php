@@ -36,7 +36,18 @@ foreach ($totalsOverride as $key => $value) {
     }
 }
 
-$content = plan_pdf_build_content($destinos, $totalsOverride);
+$logoPath = __DIR__ . '/img/santiago-logo.png';
+$logoDataUri = null;
+if (is_readable($logoPath)) {
+    $logoBinary = file_get_contents($logoPath);
+    if ($logoBinary !== false) {
+        $logoDataUri = 'data:image/png;base64,' . base64_encode($logoBinary);
+    }
+}
+
+$content = plan_pdf_build_content($destinos, $totalsOverride, [
+    'logo_data_uri' => $logoDataUri,
+]);
 $html = $content['html'];
 $lines = $content['lines'];
 

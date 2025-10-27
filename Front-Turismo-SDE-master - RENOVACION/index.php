@@ -65,7 +65,7 @@
 
         <div class="row card-body bg-transparent justify-content-center px-5 px-lg-0 px-sm-5 py-4">
 
-          <a href="destino.php"
+          <a href="destino.php?id=1"
             class="card btn btn-light p-0 me-lg-3 mb-lg-0 mb-3 col-lg-3 tarjeta-inicio">
             <img src="./img/estadio-unico.jpg" class="card-img-top tarjeta-imagen" alt="Estadio-Unico">
             <div class="card-body">
@@ -73,7 +73,7 @@
             </div>
           </a>
 
-          <a href="destino.php"
+          <a href="destino.php?id=2"
             class="card btn btn-light p-0 me-lg-3 mb-lg-0 mb-3 col-lg-3 tarjeta-inicio">
             <img src="./img/estadiode-hockey.jpg" class="card-img-top tarjeta-imagen" alt="Estadio-Unico">
             <div class="card-body">
@@ -81,7 +81,7 @@
             </div>
           </a>
 
-          <a href="destino.php"
+          <a href="destino.php?id=3"
             class="card btn btn-light p-0 me-lg-3 mb-lg-0 mb-3 col-lg-3 tarjeta-inicio">
             <img src="./img/las-torres.jpg" class="card-img-top tarjeta-imagen" alt="Estadio-Unico">
             <div class="card-body">
@@ -89,13 +89,13 @@
             </div>
           </a>
 
-          <a href="destino.php"
+          <a href="destino.php?id=4"
             class="card btn btn-light p-0 me-lg-3 mb-lg-0 mb-3 col-lg-3 tarjeta-inicio">
             <img src="./img/plaza-libertad.jpg" class="card-img-top tarjeta-imagen" alt="Estadio-Unico">
             <div class="card-body">
               <p class="card-text fs-3">Plaza Libertad</p>
             </div>
-      
+          </a>
 
           <div style="width: 24rem;">
             <a href="destinos.php">
