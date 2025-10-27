@@ -66,9 +66,6 @@ function simple_pdf_build_document(string $title, array $lines): string
 function simple_pdf_output(string $title, array $lines, string $filename = 'document.pdf'): void
 {
     $pdf = simple_pdf_build_document($title, $lines);
-    while (ob_get_level() > 0) {
-        ob_end_clean();
-    }
     header('Content-Type: application/pdf');
     header('Content-Disposition: inline; filename="' . $filename . '"');
     header('Content-Length: ' . strlen($pdf));
