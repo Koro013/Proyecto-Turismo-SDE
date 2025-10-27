@@ -20,7 +20,17 @@ function plan_pdf_build_content(array $destinos, ?array $totalsOverride = null, 
     $rows = [];
     $tableMatrix = [];
 
-    foreach ($destinos as $destino) {
+    $tableStyles = [
+        'table' => 'width:100%; border-collapse:collapse; border:1px solid #9cb6d8;'
+            . ' font-family:\'Calibri\', \'Arial\', sans-serif; font-size:14px; background-color:#ffffff;',
+        'header' => 'background-color:#1F4E79; color:#ffffff; text-transform:uppercase;'
+            . ' border:1px solid #9cb6d8; padding:8px 6px; text-align:left; letter-spacing:0.5px;',
+        'cell_left' => 'border:1px solid #9cb6d8; padding:8px 6px; text-align:left; color:#1f1f1f;',
+        'cell_right' => 'border:1px solid #9cb6d8; padding:8px 6px; text-align:right; color:#1f1f1f;',
+        'total_row' => 'background-color:#d9e1f2; font-weight:700; color:#1f1f1f;',
+    ];
+
+    foreach ($destinos as $index => $destino) {
         $nombre = (string) ($destino['nombre'] ?? '');
         $duracion = (int) ($destino['duracion'] ?? 0);
         $costo = (float) ($destino['costo'] ?? 0);
@@ -28,14 +38,20 @@ function plan_pdf_build_content(array $destinos, ?array $totalsOverride = null, 
         $calculatedDur += $duracion;
         $calculatedCosto += $costo;
 
+        $rowShade = ($index % 2 === 0) ? '#ffffff' : '#f3f6fb';
+
         $rows[] = sprintf(
-            '<tr>'
-            . '<td style="padding:6px 4px;">%s</td>'
-            . '<td style="padding:6px 4px; text-align:right;">%d</td>'
-            . '<td style="padding:6px 4px; text-align:right;">$%s</td>'
+            '<tr style="background-color:%s;">'
+            . '<td style="%s">%s</td>'
+            . '<td style="%s">%d</td>'
+            . '<td style="%s">$%s</td>'
             . '</tr>',
+            $rowShade,
+            $tableStyles['cell_left'],
             htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'),
+            $tableStyles['cell_right'],
             $duracion,
+            $tableStyles['cell_right'],
             number_format($costo, 2)
         );
         $tableMatrix[] = [
@@ -56,12 +72,12 @@ function plan_pdf_build_content(array $destinos, ?array $totalsOverride = null, 
     $htmlParts[] = '<h1 style="text-align:center;">Plan de Viaje</h1>';
 
     if (!empty($rows)) {
-        $htmlParts[] = '<table style="width:100%; border-collapse:collapse; border:1px solid #ddd;">';
+        $htmlParts[] = '<table style="' . $tableStyles['table'] . '">';
         $htmlParts[] = '<thead>'
             . '<tr>'
-            . '<th style="text-align:left; border-bottom:1px solid #ccc; padding:8px 4px;">Destino</th>'
-            . '<th style="text-align:right; border-bottom:1px solid #ccc; padding:8px 4px;">Duración (min)</th>'
-            . '<th style="text-align:right; border-bottom:1px solid #ccc; padding:8px 4px;">Costo</th>'
+            . '<th style="' . $tableStyles['header'] . '">Destino</th>'
+            . '<th style="' . $tableStyles['header'] . '; text-align:center;">Duración (min)</th>'
+            . '<th style="' . $tableStyles['header'] . '; text-align:center;">Costo</th>'
             . '</tr>'
             . '</thead>';
         $htmlParts[] = '<tbody>';
@@ -78,10 +94,10 @@ function plan_pdf_build_content(array $destinos, ?array $totalsOverride = null, 
 
     if (!empty($rows)) {
         $htmlParts[] = '<tfoot>';
-        $htmlParts[] = '<tr>'
-            . '<td style="padding:8px 4px; text-align:left; font-weight:bold; border-top:1px solid #ccc;">Total</td>'
-            . '<td style="padding:8px 4px; text-align:right; font-weight:bold; border-top:1px solid #ccc;">' . $totalDur . '</td>'
-            . '<td style="padding:8px 4px; text-align:right; font-weight:bold; border-top:1px solid #ccc;">$' . number_format($totalCosto, 2) . '</td>'
+        $htmlParts[] = '<tr style="' . $tableStyles['total_row'] . '">'
+            . '<td style="' . $tableStyles['cell_left'] . ' font-weight:inherit;">Total</td>'
+            . '<td style="' . $tableStyles['cell_right'] . ' font-weight:inherit;">' . $totalDur . '</td>'
+            . '<td style="' . $tableStyles['cell_right'] . ' font-weight:inherit;">$' . number_format($totalCosto, 2) . '</td>'
             . '</tr>';
         $htmlParts[] = '</tfoot>';
         $htmlParts[] = '</table>';
@@ -163,24 +179,31 @@ function plan_pdf_build_ascii_table(array $rows, int $totalDur, float $totalCost
     $durWidth = max($durWidth, plan_pdf_measure_width($totalDurStr));
     $costoWidth = max($costoWidth, plan_pdf_measure_width($totalCostStr));
 
-    $separator = str_repeat('-', $nameWidth) . '-+-' . str_repeat('-', $durWidth) . '-+-' . str_repeat('-', $costoWidth);
+    $rowBorder = '+' . str_repeat('-', $nameWidth + 2)
+        . '+' . str_repeat('-', $durWidth + 2)
+        . '+' . str_repeat('-', $costoWidth + 2)
+        . '+';
+    $headerBorder = '+' . str_repeat('=', $nameWidth + 2)
+        . '+' . str_repeat('=', $durWidth + 2)
+        . '+' . str_repeat('=', $costoWidth + 2)
+        . '+';
 
     $lines = [];
-    $lines[] = plan_pdf_pad_right($headers['nombre'], $nameWidth)
-        . ' | ' . plan_pdf_pad_left($headers['duracion'], $durWidth)
-        . ' | ' . plan_pdf_pad_left($headers['costo'], $costoWidth);
-    $lines[] = $separator;
+    $lines[] = $rowBorder;
+    $lines[] = plan_pdf_ascii_row($headers['nombre'], $headers['duracion'], $headers['costo'], $nameWidth, $durWidth, $costoWidth);
+    $lines[] = $headerBorder;
 
-    foreach ($rows as $row) {
-        $lines[] = plan_pdf_pad_right($row['nombre'], $nameWidth)
-            . ' | ' . plan_pdf_pad_left((string) $row['duracion'], $durWidth)
-            . ' | ' . plan_pdf_pad_left($row['costo'], $costoWidth);
+    $lastIndex = count($rows) - 1;
+    foreach ($rows as $idx => $row) {
+        $lines[] = plan_pdf_ascii_row($row['nombre'], (string) $row['duracion'], $row['costo'], $nameWidth, $durWidth, $costoWidth);
+        if ($idx < $lastIndex) {
+            $lines[] = $rowBorder;
+        }
     }
 
-    $lines[] = $separator;
-    $lines[] = plan_pdf_pad_right('TOTAL', $nameWidth)
-        . ' | ' . plan_pdf_pad_left($totalDurStr, $durWidth)
-        . ' | ' . plan_pdf_pad_left($totalCostStr, $costoWidth);
+    $lines[] = $headerBorder;
+    $lines[] = plan_pdf_ascii_row('TOTAL', $totalDurStr, $totalCostStr, $nameWidth, $durWidth, $costoWidth);
+    $lines[] = $rowBorder;
 
     return $lines;
 }
@@ -212,4 +235,12 @@ function plan_pdf_pad_left(string $value, int $width): string
     }
 
     return $value;
+}
+
+function plan_pdf_ascii_row(string $nombre, string $duracion, string $costo, int $nameWidth, int $durWidth, int $costoWidth): string
+{
+    return '| ' . plan_pdf_pad_right($nombre, $nameWidth)
+        . ' | ' . plan_pdf_pad_left($duracion, $durWidth)
+        . ' | ' . plan_pdf_pad_left($costo, $costoWidth)
+        . ' |';
 }

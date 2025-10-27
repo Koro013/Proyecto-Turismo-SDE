@@ -25,6 +25,18 @@ if (strpos($result['html'], '<tfoot>') === false) {
     fwrite(STDERR, "La tabla HTML no incluye el pie con totales\n");
     exit(1);
 }
+if (strpos($result['html'], "font-family:'Calibri'") === false) {
+    fwrite(STDERR, "La tabla HTML no aplica el estilo tipo Excel\n");
+    exit(1);
+}
+if (strpos($result['html'], '#1F4E79') === false) {
+    fwrite(STDERR, "La cabecera no utiliza el color institucional\n");
+    exit(1);
+}
+if (strpos($result['html'], '#f3f6fb') === false) {
+    fwrite(STDERR, "La tabla no alterna el color de las filas\n");
+    exit(1);
+}
 
 $lineFound = false;
 foreach ($result['lines'] as $line) {
@@ -46,6 +58,17 @@ foreach ($result['lines'] as $line) {
 }
 if (!$totalRowFound) {
     fwrite(STDERR, "La tabla en texto no incluye el total calculado\n");
+    exit(1);
+}
+$borderFound = false;
+foreach ($result['lines'] as $line) {
+    if (strpos($line, '+') === 0 && strpos($line, '=') !== false) {
+        $borderFound = true;
+        break;
+    }
+}
+if (!$borderFound) {
+    fwrite(STDERR, "La versión en texto no refleja los bordes estilo Excel\n");
     exit(1);
 }
 
