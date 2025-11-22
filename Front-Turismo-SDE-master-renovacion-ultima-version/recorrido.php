@@ -36,7 +36,7 @@ $totalCosto = array_sum(array_column($destinos, 'costo'));
     <?php include_once("./layout/nav_bar.html"); ?>
   
   </header>
-  <main class="container pt-5">
+  <main class="container mt-5 pt-5">
     <h1 class="mb-3" style="font-size:3em;"><?= htmlspecialchars($rec['nombre']) ?></h1>
     <p class="mb-4"><?= htmlspecialchars($rec['descripcion']) ?></p>
     <div class="row">
@@ -55,7 +55,7 @@ $totalCosto = array_sum(array_column($destinos, 'costo'));
         <p><strong>Costo total:</strong> $<?= number_format($totalCosto, 2) ?></p>
       </div>
       <div class="col-md-6">
-        <div id="map" style="height:400px"></div>
+        <div id="map" style="height:300px"></div>
       </div>
     </div>
   </main>
