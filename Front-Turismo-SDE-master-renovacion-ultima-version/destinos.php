@@ -43,12 +43,27 @@ $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
     </form>
     <section class="row justify-content-start ms-0 me-0">
       <?php foreach ($destinos as $d): ?>
+        <?php
+        $imagen = !empty($d['imagen']) ? $d['imagen'] : 'img/santiago-logo.png';
+        $duracionLabel = $d['duracion_texto'] ?? '';
+        if (!$duracionLabel && !empty($d['duracion'])) {
+          $duracionLabel = (int)$d['duracion'] . ' min';
+        }
+        $costoLabel = $d['costo_texto'] ?? '';
+        if (!$costoLabel) {
+          $costoLabel = '$' . number_format((float)$d['costo'], 2);
+        }
+        ?>
         <a href="destino.php?id=<?= $d['id'] ?>" class="text-decoration-none text-dark col-lg-4 p-0 me-lg-0 px-lg-2 mb-lg-3 mb-3 col-md-12">
           <div class="card btn btn-light h-100">
-            <img src="<?= $d['imagen'] ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
+            <img src="<?= $imagen ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
             <div class="card-body">
               <p class="card-text fs-3 mb-1"><?= htmlspecialchars($d['nombre']) ?></p>
-              <p class="roboto-300">Duración: <?= (int)$d['duracion'] ?> min<br>Costo: $<?= number_format($d['costo'], 2) ?></p>
+              <p class="roboto-300 mb-1">Duración: <?= htmlspecialchars($duracionLabel) ?></p>
+              <p class="roboto-300 mb-1">Costo: <?= htmlspecialchars($costoLabel) ?></p>
+              <?php if (!empty($d['accesibilidad'])): ?>
+                <span class="badge text-bg-secondary"><?= htmlspecialchars($d['accesibilidad']) ?></span>
+              <?php endif; ?>
             </div>
           </div>
         </a>

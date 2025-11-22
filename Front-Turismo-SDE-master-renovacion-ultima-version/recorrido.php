@@ -19,8 +19,15 @@ $totalCosto = array_sum(array_column($destinos, 'costo'));
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <title><?= htmlspecialchars($rec['nombre']) ?> - Recorrido</title>
   <?php include_once('layout\links_head.html'); ?>
+  <style>
+    #map {
+      min-height: 400px;
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body class="bg-body bebas-neue-regular">
