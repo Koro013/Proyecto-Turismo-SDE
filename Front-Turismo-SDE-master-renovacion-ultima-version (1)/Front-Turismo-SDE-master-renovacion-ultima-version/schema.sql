@@ -17,7 +17,8 @@ CREATE TABLE destinos (
     enlace VARCHAR(255),
     latitud DECIMAL(10,6),
     longitud DECIMAL(10,6),
-    categoria VARCHAR(100)
+    categoria VARCHAR(100),
+    CONSTRAINT uniq_destino_nombre UNIQUE (nombre)
 );
 
 CREATE TABLE recorridos (
@@ -35,9 +36,9 @@ CREATE TABLE recorrido_destinos (
 );
 
 INSERT INTO destinos (nombre, descripcion, horario, costo, duracion, duracion_texto, costo_texto, accesibilidad, imagen, enlace, latitud, longitud, categoria) VALUES
-('Estadio Único', 'Recinto deportivo moderno.', '09:00-20:00', 0.00, 60, '60 min', 'Gratuito', '♿ No informado', 'img/estadio-unico.jpg', NULL, -27.766057, -64.273412, 'Deportivo'),
-('Cancha de Hockey', 'Estadio de hockey provincial.', '08:00-19:00', 0.00, 45, '45 min', 'Gratuito', '♿ No informado', 'img/cancha-hockey.jpg', NULL, -27.765000, -64.270000, 'Deportivo'),
-('Complejo Juan Felipe Ibarra', 'Complejo de oficinas gubernamentales.', '09:00-18:00', 0.00, 30, '30 min', 'Gratuito', '♿ No informado', 'img/complejo-juan-felipe-ibarra.jpg', NULL, -27.787000, -64.262000, 'Cultural'),
+('Estadio Único', 'Recinto deportivo moderno.', '09:00-20:00', 0.00, 60, '60 min', 'Gratuito', '♿ Total', 'img/estadio-unico.jpg', NULL, -27.766057, -64.273412, 'Deportivo'),
+('Cancha de Hockey', 'Estadio de hockey provincial.', '08:00-19:00', 0.00, 45, '45 min', 'Gratuito', '♿ Parcial', 'img/cancha-hockey.jpg', NULL, -27.765000, -64.270000, 'Deportivo'),
+('Complejo Juan Felipe Ibarra', 'Complejo de oficinas gubernamentales.', '09:00-18:00', 0.00, 30, '30 min', 'Gratuito', '♿ Total', 'img/complejo-juan-felipe-ibarra.jpg', NULL, -27.787000, -64.262000, 'Cultural'),
 
 ('Parque Aguirre', 'Espacio verde tradicional ideal para caminatas y aire libre', NULL, 0.00, 68, '45–90 min', 'Gratuito', '♿ Total', 'img/parque-aguirre.jpg', 'https://maps.google.com/?cid=14946438569306428049', NULL, NULL, 'Naturaleza'),
 ('Costanera del Río Dulce', 'Paseo costero con vistas al río, ideal para bici o atardecer', NULL, 0.00, 45, '30–60 min', 'Gratuito', '♿ Total', 'img/costanera-rio-dulce.jpg', 'https://maps.google.com/?cid=5827790631492247797', NULL, NULL, 'Naturaleza'),
@@ -80,3 +81,22 @@ INSERT INTO recorrido_destinos (recorrido_id,destino_id) VALUES
 (5,15), (5,16), (5,17), (5,18), (5,21),
 (6,19), (6,20),
 (7,21), (7,5);
+
+-- Limpieza defensiva por si la base existente tiene duplicados previos.
+-- 1. Reasignar relaciones a la versión con id más bajo de cada destino repetido.
+UPDATE recorrido_destinos rd
+JOIN (
+  SELECT d.id AS dup_id, t.keep_id
+  FROM destinos d
+  JOIN (
+    SELECT nombre, MIN(id) AS keep_id
+    FROM destinos
+    GROUP BY nombre
+    HAVING COUNT(*) > 1
+  ) t ON d.nombre = t.nombre
+) map ON rd.destino_id = map.dup_id
+SET rd.destino_id = map.keep_id;
+
+-- 2. Eliminar los registros duplicados dejando solo el id mínimo por nombre.
+DELETE d1 FROM destinos d1
+JOIN destinos d2 ON d1.nombre = d2.nombre AND d1.id > d2.id;
