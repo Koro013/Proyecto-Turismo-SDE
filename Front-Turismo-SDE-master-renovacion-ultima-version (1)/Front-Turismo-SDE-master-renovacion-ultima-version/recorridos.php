@@ -7,7 +7,15 @@ $sql = 'SELECT r.id, r.nombre, r.descripcion,
                SUM(d.costo) AS costo
         FROM recorridos r
         JOIN recorrido_destinos rd ON r.id = rd.recorrido_id
-        JOIN destinos d ON d.id = rd.destino_id';
+        JOIN (
+          SELECT d.*
+          FROM destinos d
+          INNER JOIN (
+            SELECT MIN(id) AS id
+            FROM destinos
+            GROUP BY nombre
+          ) uniq ON uniq.id = d.id
+        ) d ON d.id = rd.destino_id';
 $params = [];
 if ($categoria) {
   $sql .= ' WHERE d.categoria = ?';
@@ -26,13 +34,13 @@ $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include_once('layout\links_head.html'); ?>
+  <?php include_once('layout/links_head.html'); ?>
 </head>
 
 <body class="bg-body bebas-neue-regular">
   <header class="pb-3">
     
-    <?php include_once("./layout/nav_bar.html"); ?>
+    <?php include_once('./layout/nav_bar.html'); ?>
 
   </header>
 
