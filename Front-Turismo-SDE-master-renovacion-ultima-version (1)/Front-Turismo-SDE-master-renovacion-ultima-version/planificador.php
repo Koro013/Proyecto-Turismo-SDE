@@ -1,6 +1,8 @@
 <?php
-require 'db.php';
-$destinos = $pdo->query('SELECT * FROM destinos')->fetchAll();
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/lib/helpers.php';
+
+$destinos = fetchUniqueDestinos($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,13 +12,13 @@ $destinos = $pdo->query('SELECT * FROM destinos')->fetchAll();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Planificador - Turismo - Santiago del Estero</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <?php include_once('layout\links_head.html'); ?>
+  <?php include_once('layout/links_head.html'); ?>
 </head>
 
 <body class="bg-body bebas-neue-regular">
   <header class="pb-2">
 
-    <?php include_once("./layout/nav_bar.html"); ?>
+    <?php include_once('./layout/nav_bar.html'); ?>
   
   </header>
   <main class="container pt-5 mt-5 mb-5">

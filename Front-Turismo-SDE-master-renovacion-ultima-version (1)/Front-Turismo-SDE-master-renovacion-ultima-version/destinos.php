@@ -1,13 +1,10 @@
 <?php
-require 'db.php';
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/lib/helpers.php';
+
 $categoria = $_GET['categoria'] ?? '';
-if ($categoria) {
-  $stmt = $pdo->prepare('SELECT * FROM destinos WHERE categoria = ?');
-  $stmt->execute([$categoria]);
-} else {
-  $stmt = $pdo->query('SELECT * FROM destinos');
-}
-$destinos = $stmt->fetchAll();
+$destinos = fetchUniqueDestinos($pdo, $categoria);
+
 $catStmt = $pdo->query('SELECT DISTINCT categoria FROM destinos');
 $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 ?>
@@ -17,13 +14,13 @@ $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <?php include_once('layout\links_head.html'); ?>
+  <?php include_once('layout/links_head.html'); ?>
 </head>
 
 <body class="bg-body bebas-neue-regular">
   <header class="pb-3">
     
-    <?php include_once("./layout/nav_bar.html"); ?>
+    <?php include_once('./layout/nav_bar.html'); ?>
 
   </header>
 
@@ -45,7 +42,7 @@ $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
       <?php foreach ($destinos as $d): ?>
         <a href="destino.php?id=<?= $d['id'] ?>" class="text-decoration-none text-dark col-lg-4 p-0 me-lg-0 px-lg-2 mb-lg-3 mb-3 col-md-12">
           <div class="card btn btn-light h-100">
-            <img src="<?= $d['imagen'] ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
+            <img src="<?= resolveImagePath($d['imagen']) ?>" class="card-img-top tarjeta-imagen" alt="<?= htmlspecialchars($d['nombre']) ?>">
             <div class="card-body">
               <p class="card-text fs-3 mb-1"><?= htmlspecialchars($d['nombre']) ?></p>
               <p class="roboto-300">Duración: <?= (int)$d['duracion'] ?> min<br>Costo: $<?= number_format($d['costo'], 2) ?></p>
