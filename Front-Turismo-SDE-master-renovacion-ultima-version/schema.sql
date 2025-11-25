@@ -1,11 +1,7 @@
-CREATE DATABASE turismo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS turismo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE turismo;
 
-DROP TABLE IF EXISTS recorrido_destinos;
-DROP TABLE IF EXISTS recorridos;
-DROP TABLE IF EXISTS destinos;
-
-CREATE TABLE destinos (
+CREATE TABLE IF NOT EXISTS destinos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT,
@@ -23,13 +19,28 @@ CREATE TABLE destinos (
     UNIQUE KEY unique_nombre (nombre)
 );
 
-CREATE TABLE recorridos (
+-- Alinear estructura de tablas existentes sin borrar datos cargados
+ALTER TABLE destinos
+    ADD COLUMN IF NOT EXISTS horario VARCHAR(100),
+    ADD COLUMN IF NOT EXISTS costo DECIMAL(10,2),
+    ADD COLUMN IF NOT EXISTS duracion INT,
+    ADD COLUMN IF NOT EXISTS duracion_texto VARCHAR(50),
+    ADD COLUMN IF NOT EXISTS costo_texto VARCHAR(100),
+    ADD COLUMN IF NOT EXISTS accesibilidad VARCHAR(50),
+    ADD COLUMN IF NOT EXISTS imagen VARCHAR(255),
+    ADD COLUMN IF NOT EXISTS enlace VARCHAR(255),
+    ADD COLUMN IF NOT EXISTS latitud DECIMAL(10,6),
+    ADD COLUMN IF NOT EXISTS longitud DECIMAL(10,6),
+    ADD COLUMN IF NOT EXISTS categoria VARCHAR(100),
+    ADD UNIQUE INDEX IF NOT EXISTS unique_nombre (nombre);
+
+CREATE TABLE IF NOT EXISTS recorridos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     descripcion TEXT
 );
 
-CREATE TABLE recorrido_destinos (
+CREATE TABLE IF NOT EXISTS recorrido_destinos (
     recorrido_id INT,
     destino_id INT,
     PRIMARY KEY(recorrido_id,destino_id),
@@ -37,8 +48,11 @@ CREATE TABLE recorrido_destinos (
     FOREIGN KEY(destino_id) REFERENCES destinos(id)
 );
 
-INSERT INTO destinos (nombre, descripcion, horario, costo, duracion, duracion_texto, costo_texto, accesibilidad, imagen, enlace,
- latitud, longitud, categoria) VALUES
+-- Eliminar duplicados existentes conservando el registro con id más bajo
+DELETE d1 FROM destinos d1
+JOIN destinos d2 ON d1.nombre = d2.nombre AND d1.id > d2.id;
+
+INSERT IGNORE INTO destinos (nombre, descripcion, horario, costo, duracion, duracion_texto, costo_texto, accesibilidad, imagen, enlace, latitud, longitud, categoria) VALUES
 ('Estadio Madre de Ciudades', 'Estadio moderno con museo y miradores', '09:00-20:00', 0.00, 90, '60–120 min', 'Gratuito (museo con reserva)', '♿ Total', 'img/estadio-unico.jpg', 'https://maps.google.com/?cid=7643874195238516119', -27.766057, -64.273412, 'Deportes y Aventura'),
 ('Cancha de Hockey', 'Estadio de hockey provincial.', '08:00-19:00', 0.00, 45, '45 min', 'Gratuito', 'No informado', 'img/estadiode-hockey.jpg', NULL, -27.765000, -64.270000, 'Deportes y Aventura'),
 ('Complejo Juan Felipe Ibarra', 'Complejo de oficinas gubernamentales con mirador urbano.', '09:00-18:00', 0.00, 30, '30 min', 'Gratuito', '♿ Total', 'img/las-torres.jpg', NULL, -27.787000, -64.262000, 'Cultura'),
@@ -60,7 +74,7 @@ INSERT INTO destinos (nombre, descripcion, horario, costo, duracion, duracion_te
 ('Parque del Encuentro', 'Parque moderno con zonas de recreación y eventos', NULL, 0.00, 45, '30–60 min', 'Gratuito', '♿ Total', 'img/arboles.svg', 'https://maps.google.com/?cid=9728406006659755144', NULL, NULL, 'Plazas'),
 ('Natatorio Olímpico', 'Complejo deportivo con piscina olímpica y gimnasio', NULL, 800.00, 90, '60–120 min', '$800 entrada', '♿ Total', 'img/estadiode-hockey.jpg', 'https://maps.google.com/?cid=14840033277584301275', NULL, NULL, 'Otros');
 
-INSERT INTO recorridos (nombre, descripcion) VALUES
+INSERT IGNORE INTO recorridos (nombre, descripcion) VALUES
 ('Recorrido Deportivo', 'Explora los principales puntos deportivos de la ciudad.'),
 ('Ruta de Naturaleza', 'Paradas para pasear entre árboles, río y aire libre'),
 ('Circuito Cultural', 'Música, museos y centros culturales de la ciudad'),
@@ -69,7 +83,7 @@ INSERT INTO recorridos (nombre, descripcion) VALUES
 ('Plazas y Encuentros', 'Recorrido por plazas y parques urbanos para descansar'),
 ('Bienestar y Piscinas', 'Opciones techadas y acuáticas para entrenar y relajarse');
 
-INSERT INTO recorrido_destinos (recorrido_id,destino_id) VALUES
+INSERT IGNORE INTO recorrido_destinos (recorrido_id,destino_id) VALUES
 (1,1),
 (1,2),
 (1,15),
@@ -97,4 +111,3 @@ INSERT INTO recorrido_destinos (recorrido_id,destino_id) VALUES
 (6,19),
 (7,20),
 (7,5);
-

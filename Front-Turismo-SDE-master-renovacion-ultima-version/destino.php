@@ -29,7 +29,10 @@ if (!$dest) {
   <main class="container pt-5 mt-5 mb-5">
     <div class="row mb-5 pb-5">
       <div class="col-md-6">
-        <?php $imagen = (!empty($dest['imagen']) && file_exists($dest['imagen'])) ? $dest['imagen'] : 'img/santiago-logo.png'; ?>
+        <?php
+        $rutaImagen = $dest['imagen'] ?? '';
+        $imagen = (!empty($rutaImagen) && is_file(__DIR__ . '/' . $rutaImagen)) ? $rutaImagen : 'img/santiago-logo.png';
+        ?>
         <img src="<?= $imagen ?>" class="img-fluid rounded" alt="<?= htmlspecialchars($dest['nombre']) ?>">
       </div>
       <div class="col-md-6">

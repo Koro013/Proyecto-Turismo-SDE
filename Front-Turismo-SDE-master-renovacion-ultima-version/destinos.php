@@ -44,7 +44,8 @@ $categorias = $catStmt->fetchAll(PDO::FETCH_COLUMN);
     <section class="row justify-content-start ms-0 me-0">
       <?php foreach ($destinos as $d): ?>
         <?php
-        $imagen = (!empty($d['imagen']) && file_exists($d['imagen'])) ? $d['imagen'] : 'img/santiago-logo.png';
+        $rutaImagen = $d['imagen'] ?? '';
+        $imagen = (!empty($rutaImagen) && is_file(__DIR__ . '/' . $rutaImagen)) ? $rutaImagen : 'img/santiago-logo.png';
         $duracionLabel = $d['duracion_texto'] ?? '';
         if (!$duracionLabel && !empty($d['duracion'])) {
           $duracionLabel = (int)$d['duracion'] . ' min';
