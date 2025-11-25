@@ -20,13 +20,13 @@ $totalCosto = array_sum(array_column($destinos, 'costo'));
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($rec['nombre']) ?> - Recorrido</title>
-  <?php include_once('layout\links_head.html'); ?>
+  <?php include_once('layout/links_head.html'); ?>
 </head>
 
 <body class="bg-body bebas-neue-regular">
   <header>
 
-    <?php include_once("./layout/nav_bar.html"); ?>
+    <?php include_once('./layout/nav_bar.html'); ?>
   
   </header>
   <main class="container pt-5">

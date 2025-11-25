@@ -1,5 +1,7 @@
 <?php
-require 'db.php';
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/lib/helpers.php';
+
 $id = $_GET['id'] ?? 0;
 $stmt = $pdo->prepare('SELECT * FROM destinos WHERE id = ?');
 $stmt->execute([$id]);
@@ -17,19 +19,19 @@ if (!$dest) {
   <title><?= htmlspecialchars($dest['nombre']) ?> - Turismo</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-  <?php include_once('layout\links_head.html'); ?>
+  <?php include_once('layout/links_head.html'); ?>
 </head>
 
 <body class="bg-body bebas-neue-regular">
   <header class="pb-3">
 
-    <?php include_once("./layout/nav_bar.html"); ?>
+    <?php include_once('./layout/nav_bar.html'); ?>
   
   </header>
   <main class="container pt-5 mt-5 mb-5">
     <div class="row mb-5 pb-5">
       <div class="col-md-6">
-        <img src="<?= $dest['imagen'] ?>" class="img-fluid rounded" alt="<?= htmlspecialchars($dest['nombre']) ?>">
+        <img src="<?= resolveImagePath($dest['imagen']) ?>" class="img-fluid rounded" alt="<?= htmlspecialchars($dest['nombre']) ?>">
       </div>
       <div class="col-md-6">
         <h1 class="mb-3" style="font-size:3em;"><?= htmlspecialchars($dest['nombre']) ?></h1>
